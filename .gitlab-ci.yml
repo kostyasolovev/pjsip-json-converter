@@ -1,0 +1,17 @@
+image: golangci/golangci-lint
+
+stages:
+  - build
+
+build:
+  stage: build
+  tags:
+    - docker
+  script:
+    - golangci-lint run
+    - go test ./...
+    - go build -o pjsip ./cmd
+  artifacts:
+    paths:
+      - pjsip
+    expire_in: 1 week
